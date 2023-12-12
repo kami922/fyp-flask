@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Twitter Sentiment Analysis</title>
+</head>
+
+<body>
+    <h1>Twitter Sentiment Analysis</h1>
+    <p>This is a simple web application for sentiment analysis of Twitter data.</p>
+
+    <form action="/analyze" method="post">
+        <label for="tweet">Enter a tweet:</label>
+        <input type="text" id="tweet" name="tweet" required>
+        <button type="submit">Analyze</button>
+    </form>
+
+    <h2>Analysis Results</h2>
+    <p id="result">The sentiment analysis results will be displayed here.</p>
+
+    <script>
+        document.querySelector('form').addEventListener('submit', async function (event) {
+            event.preventDefault();
+            const tweet = document.getElementById('tweet').value;
+
+            const response = await fetch('/analyze', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ 'tweet': tweet }),
+            });
+
+            const data = await response.json();
+            document.getElementById('result').innerText = `Sentiment: ${data.sentiment}`;
+        });
+    </script>
+</body>
+
+</html>
