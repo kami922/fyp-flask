@@ -2,14 +2,14 @@
  {
      "builds": [
          {
-             "src": "api/hello.py",
+             "src": "./fm.py",
              "use": "@vercel/python"
          }
      ],
      "routes": [
          {
              "src": "/(.*)",
-             "dest": "api/hello.py"
+             "dest": "/"
          }
      ]
  }
